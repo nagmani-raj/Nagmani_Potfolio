@@ -3,6 +3,7 @@
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   justify-content: space-between;
+  align-items: flex-start;
   padding: 20px 0px;
   margin-bottom: -100px;
   box-sizing: border-box;
@@ -16,13 +17,16 @@
 .header ul {
   font-size: 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 40px;
-  row-gap: 8px;
-  align-items: end;
+  column-gap: 14px;
+  row-gap: 6px;
+  align-items: center;
+  max-width: 210px;
 }
 
 .header ul li {
@@ -53,12 +57,14 @@
 @media only screen and (min-width: 500px) {
   .header {
     padding: 20px 0px;
+    align-items: center;
   }
 
   .header ul {
-    flex-direction: row;
     align-items: center;
     font-size: 14px;
+    column-gap: 24px;
+    max-width: none;
   }
 
   .header ul li {
@@ -97,14 +103,47 @@
 
 .logo {
   width: 60px;
-  /* adjust as needed */
   height: auto;
   object-fit: contain;
+  display: block;
 }
 
-/* Optional: mobile ke liye thoda chhota */
 @media (max-width: 768px) {
+  .header {
+    padding: 16px 0 0;
+  }
+
+  .header ul {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
+
   .logo {
     width: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    align-items: center;
+  }
+
+  .header ul {
+    max-width: 165px;
+    column-gap: 12px;
+    font-size: 10px;
+  }
+
+  .header ul li {
+    letter-spacing: 0.8px;
+  }
+
+  .navbar-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 52px;
   }
 }
