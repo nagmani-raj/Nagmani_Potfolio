@@ -13,16 +13,43 @@ import {
 import setAnimations from "./utils/animationUtils";
 import { setProgress } from "../Loading";
 
+const canCreateWebGLContext = () => {
+  const canvas = document.createElement("canvas");
+
+  try {
+    return Boolean(
+      canvas.getContext("webgl2", { powerPreference: "default" }) ||
+        canvas.getContext("webgl", { powerPreference: "default" }) ||
+        canvas.getContext("experimental-webgl")
+    );
+  } catch (error) {
+    console.error("WebGL capability check failed.", error);
+    return false;
+  }
+};
+
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
-  const { setLoading } = useLoading();
+  const { setLoading, setIsLoading } = useLoading();
 
   const [webglUnavailable, setWebglUnavailable] = useState(false);
 
   useEffect(() => {
     const root = canvasDiv.current;
     if (!root) return;
+    const failScene = () => {
+      setWebglUnavailable(true);
+      setLoading(100);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 0);
+    };
+
+    if (!canCreateWebGLContext()) {
+      failScene();
+      return;
+    }
 
     let renderer: THREE.WebGLRenderer;
     let rafId = 0;
@@ -45,18 +72,18 @@ const Scene = () => {
       renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: window.innerWidth > 768,
-        powerPreference: "high-performance",
+        powerPreference: "default",
       });
     } catch (error) {
       console.error("Error creating WebGL context.", error);
-      setWebglUnavailable(true);
+      failScene();
       return;
     }
 
     const handleContextLost = (event: Event) => {
       event.preventDefault();
       if (!isDisposed) {
-        setWebglUnavailable(true);
+        failScene();
       }
     };
 
@@ -157,7 +184,7 @@ const Scene = () => {
       .catch((error) => {
         console.error("Error loading character scene:", error);
         if (!isDisposed) {
-          setWebglUnavailable(true);
+          failScene();
         }
       });
 
@@ -237,16 +264,27 @@ const Scene = () => {
         root.removeChild(renderer.domElement);
       }
     };
-  }, [setLoading]);
+  }, [setIsLoading, setLoading]);
 
   return (
     <>
       <div className="character-container">
         <div className="character-model" ref={canvasDiv}>
           {webglUnavailable && (
-            <p style={{ color: "#fff", textAlign: "center", paddingTop: "2rem" }}>
-              3D preview is unavailable on this device/browser.
-            </p>
+            <div
+              style={{
+                color: "#fff",
+                textAlign: "center",
+                paddingTop: "2rem",
+                position: "relative",
+                zIndex: 4,
+              }}
+            >
+              <p>3D preview is unavailable on this device or browser.</p>
+              <p style={{ color: "#9ca3af", fontSize: "0.95rem" }}>
+                The rest of the portfolio is still fully available.
+              </p>
+            </div>
           )}
           <div className="character-rim"></div>
           <div className="character-hover" ref={hoverDivRef}></div>

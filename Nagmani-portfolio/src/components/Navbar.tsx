@@ -5,6 +5,8 @@ import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "./styles/Navbar.css";
 
+const logoSrc = "/logo.png?v=20260324";
+
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 export let smoother: ScrollSmoother;
 
@@ -48,7 +50,7 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          <img src="/logo.jpg" alt="NR Logo" className="logo" />
+          <img src={logoSrc} alt="NR Logo" className="logo" />
         </a>
         <a
           href="mailto:nagmaniraj133@gmail.com"
