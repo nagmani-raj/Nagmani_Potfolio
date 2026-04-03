@@ -5,6 +5,56 @@
 
 ---
 
+## `--> How To Run This Project Locally`
+
+### `1. Clone the repository`
+
+```bash
+git clone [<your-repo-url>](https://github.com/nagmani-raj/Nagmani_Potfolio)
+cd Nagmani-portfolio
+```
+
+### `2. Install dependencies`
+
+```bash
+npm install
+```
+
+### `3. Start development server`
+
+```bash
+npm run dev
+```
+
+### `4. Build for production`
+
+```bash
+npm run build
+```
+
+### `5. Preview production build`
+
+```bash
+npm run preview
+```
+
+### `6. Lint the project`
+
+```bash
+npm run lint
+```
+
+---
+
+## `--> Important Setup Note About GSAP`
+
+Because this project uses:
+
+- `ScrollSmoother`
+- `SplitText`
+
+---
+
 ## `--> Project Overview`
 
 This project is a **personal developer portfolio website** for **Nagmani Raj**.
@@ -1560,53 +1610,7 @@ That is okay for a personal portfolio, but not ideal if non-developers need to u
 
 ---
 
-## `--> How To Run This Project Locally`
 
-### `1. Clone the repository`
-
-```bash
-git clone <your-repo-url>
-cd Nagmani-portfolio
-```
-
-### `2. Install dependencies`
-
-```bash
-npm install
-```
-
-### `3. Start development server`
-
-```bash
-npm run dev
-```
-
-### `4. Build for production`
-
-```bash
-npm run build
-```
-
-### `5. Preview production build`
-
-```bash
-npm run preview
-```
-
-### `6. Lint the project`
-
-```bash
-npm run lint
-```
-
----
-
-## `--> Important Setup Note About GSAP`
-
-Because this project uses:
-
-- `ScrollSmoother`
-- `SplitText`
 
 You may need to ensure your GSAP environment includes those plugins correctly.
 
