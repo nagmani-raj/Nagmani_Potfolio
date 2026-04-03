@@ -1,7 +1,7 @@
 # `NAGMANI RAJ PORTFOLIO`
 ### `>>> Interactive 3D Developer Portfolio built with React + TypeScript + Vite + Three.js + GSAP`
 
-![Portfolio Preview](public/images/preview.png)
+![Portfolio Preview](Nagmani-portfolio/public/images/preview.png)
 
 ---
 
